@@ -2,7 +2,7 @@ import './styles/nlab-theme.scss';
 
 import * as R from './random-utils.js';
 import nlabGrammar from './grammar/nlab.ne';
-import Generator from './grammar/Generator.js';
+import NearleyGenerator from 'nearley-generator';
 
 function stripLinks(el) {
     while (el.children.length > 0) {
@@ -20,7 +20,7 @@ function makeTocListItem(txt) {
 }
 
 function makePage() {
-    let g = new Generator(nlabGrammar);
+    let g = new NearleyGenerator(nlabGrammar);
 
     let pageTitle = document.getElementById('title');
     pageTitle.innerHTML = g.generate('title', 0.3);
