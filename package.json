@@ -1,8 +1,8 @@
 {
-  "name": "new-application",
-  "version": "1.0.0",
-  "description": "A new web application",
-  "author": "Author",
+  "name": "the-mlab",
+  "version": "0.1.0",
+  "description": "A wiki for collaborative work on \"category theory\"",
+  "author": "Chase Meadors",
   "scripts": {
     "serve": "webpack-dev-server -d",
     "build": "webpack"
@@ -24,5 +24,4 @@
     "foundation-sites": "^6.4.4-rc1",
     "randexp": "^0.4.6"
   },
-  "false": {}
 }
