@@ -1,7 +1,7 @@
 # Core ==================================
 
 _ -> " "
-link[X] -> "<a href=\"/\">" $X "</a>"
+link[X] -> "<a href=\".\">" $X "</a>"
 strong[X] -> "<strong>" $X "</strong>"
 ml[X] -> $X | link[$X]
 maybe[X] -> $X | null
