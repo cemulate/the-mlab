@@ -31,7 +31,7 @@ function makePage() {
     let t = capitalize(g.generate('title', 0.3).trim());
 
     document.getElementById('title').innerHTML = t;
-    document.getElementById('window-title').innerHTML = t;
+    document.getElementById('window-title').innerHTML = t + ' in mLab';
     stripLinks(document.getElementById('title'));
     stripLinks(document.getElementById('window-title'));
 
