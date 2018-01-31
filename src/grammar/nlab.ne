@@ -16,6 +16,14 @@ mathcal[X] -> "\\mathcal{" $X "}"
 mathscr[X] -> "\\mathscr{" $X "}"
 mathbf[X] -> "\\mathbf{" $X "}"
 
+overline[X] -> "\\overline{" $X "}"
+widehat[X] -> "\\widehat{" $X "}"
+hat[X] -> "\\hat{" $X "}"
+dot[X] -> "\\dot{" $X "}"
+ddot[X] -> "\\ddot{" $X "}"
+
+decorate[X] -> overline[$X] | widehat[$X] | hat[$X] | dot[$X] | ddot[$X]
+
 paren[X] -> "\\left(" $X "\\right)"
 bracket[X] -> "\\left[" $X "\\right]"
 group[X] -> paren[$X] | bracket[$X]
@@ -25,6 +33,7 @@ mLower -> "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "m" 
 mUpper -> "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
 mAnyChar -> mLower | mUpper
 mAnyCharF -> mathfrak[mAnyChar] | mathcal[mAnyChar] | mathscr[mAnyChar] | mathbf[mAnyChar]
+mAnyCharFA -> either[mAnyCharF, decorate[mAnyCharF]]
 
 mBinOp -> "+" | "-" | "\\cdot" | "\\bullet" | "\\vee" | "\\wedge" | "\\backslash" | "\\circ"
 mArrow -> "\\leftarrow" | "\\rightarrow" | "\\leftrightarrow" | "\\Leftarrow" | "\\Rightarrow" | "\\Leftrightarrow"
@@ -32,7 +41,7 @@ mArrow -> "\\leftarrow" | "\\rightarrow" | "\\leftrightarrow" | "\\Leftarrow" | 
 tex[X] -> "\\(" $X "\\)"
 dtex[X] -> "\\[" $X "\\]"
 
-mCategoryish -> mUpper | mathcal[mUpper] | mathbf[mUpper]
+mCategoryish -> mUpper | mAnyCharFA | mAnyCharFA
 mFunctorish -> mCategoryish _ mArrow _ mCategoryish
 
 mSmallExpr ->
@@ -42,10 +51,10 @@ mSmallExpr ->
 | mSmallExpr _ mBinOp _ mSmallExpr
 | mCategoryish
 | mFunctorish
-| mAnyCharF
+| mAnyCharFA
 
 mBigOp -> "\\sum" | "\\prod" | "\\coprod" | "\\int" | "\\bigcap" | "\\bigcup" | "\\bigsqcup" | "\\bigvee" | "\\bigwedge" | "\\bigodot" | "\\bigotimes" | "\\bigoplus"
-mBigOpFull -> mBigOp "_{" mLower maybe[":" _ mFunctorish] "}" maybe["^{" mAnyCharF "}"]
+mBigOpFull -> mBigOp "_{" mLower maybe[":" _ mFunctorish] "}" maybe["^{" mAnyCharFA "}"]
 
 mDisplayMath ->
   mBigOpFull _ mSmallExpr
