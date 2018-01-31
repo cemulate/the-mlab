@@ -67,7 +67,7 @@ function makePage() {
 
         main.appendChild(header);
 
-        let nSentences = R.randomInRange(5, 9);
+        let nSentences = R.randomInRange(3, 7);
 
         let defnProbs = [0.8, 0.5, 0.15];
         let listProbs = [0.7, 0.3];

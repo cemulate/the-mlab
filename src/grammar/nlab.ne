@@ -33,7 +33,7 @@ mLower -> "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "m" 
 mUpper -> "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
 mAnyChar -> mLower | mUpper
 mAnyCharF -> mathfrak[mAnyChar] | mathcal[mAnyChar] | mathscr[mAnyChar] | mathbf[mAnyChar]
-mAnyCharFA -> either[mAnyCharF, decorate[mAnyCharF]]
+mAnyCharFA -> either[mAnyCharF, either[mAnyCharF, either[mAnyCharF, decorate[mAnyCharF]]]]
 
 mBinOp -> "+" | "-" | "\\cdot" | "\\bullet" | "\\vee" | "\\wedge" | "\\backslash" | "\\circ"
 mArrow -> "\\leftarrow" | "\\rightarrow" | "\\leftrightarrow" | "\\Leftarrow" | "\\Rightarrow" | "\\Leftrightarrow"
