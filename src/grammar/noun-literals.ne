@@ -1,4 +1,7 @@
-noun ->
+digit -> [0-9]
+either[X,Y] -> $X | $Y
+
+nounPrimitive ->
   "category"
 | "monoid"
 | "monad"
@@ -17,9 +20,37 @@ noun ->
 | "object"
 | "bi-category"
 | "bundle"
-| "co-" noun
+| "limit"
+| "end"
+| "cover"
+| "hypercover"
+| "embedding"
+| "homotopy"
+| "pushout"
+| "pullback"
+| "product"
+| "diagram"
+| "morphism"
+| "arrow"
+| "complex"
+| "resolution"
+| "tensor"
+| "adjunction"
+| "unit"
+| "isomorphism"
+| "natural transformation"
+| "chain complex"
+| "spectrum"
+| "operad"
+| "extensions"
+| "structure"
+| digit "-cell"
 
-nouns ->
+noun ->
+  either[either["co-", null], null] nounPrimitive
+| either[either[either["quasi-", null], null], null] nounPrimitive
+
+nounPrimitives ->
   "categories"
 | "monoids"
 | "monads"
@@ -38,4 +69,31 @@ nouns ->
 | "objects"
 | "bi-categories"
 | "bundles"
-| "co-" nouns
+| "limits"
+| "ends"
+| "covers"
+| "hypercovers"
+| "embeddings"
+| "homotopies"
+| "pushout"
+| "pullback"
+| "products"
+| "diagrams"
+| "morphisms"
+| "arrows"
+| "resolution"
+| "tensors"
+| "adjunctions"
+| "units"
+| "isomorphisms"
+| "natural transformations"
+| "chain complexes"
+| "spectra"
+| "operads"
+| "extensions"
+| "structures"
+| digit "-cells"
+
+nouns ->
+  either[either["co-", null], null] nounPrimitives
+| either[either[either["quasi-", null], null], null] nounPrimitives

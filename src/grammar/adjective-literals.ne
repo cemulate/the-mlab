@@ -1,4 +1,6 @@
-adj ->
+either[X,Y] -> $X | $Y
+
+adjPrimitive ->
   "categorical"
 | "monoidal"
 | "functorial"
@@ -21,9 +23,35 @@ adj ->
 | "Kan"
 | "ambient"
 | "composable"
-| "co-" adj
+| "virtual"
+| "weighted"
+| "Čech"
+| "Yoneda"
+| "transfinite"
+| "infinite"
+| "finite"
+| "normal"
+| "perfect"
+| "regular"
+| "cyclic"
+| "acyclic"
+| "proper"
+| "fibrant"
+| "anodyne"
+| "internal"
+| "derived"
+| "symmetric"
+| "cartesian-closed"
+| "forgetful"
+| "framed"
+| "relative"
+| "dendroial"
+| "reflective"
 
-adverb ->
+adj ->
+  either[either["co-", null], null] adjPrimitive
+
+adverbPrimitive ->
   "categorically"
 | "monoidally"
 | "functorially"
@@ -37,5 +65,18 @@ adverb ->
 | "completely"
 | "globally"
 | "simplicially"
-| "co-" adverb
-| adverb "-enriched"
+| "virtually"
+| "normally"
+| "perfectly"
+| "regularly"
+| "cyclicly"
+| "properly"
+| "internally"
+| "symmetrically"
+| "relatively"
+| "dendroidally"
+| "reflectively"
+
+adverb ->
+  either[either["co-", null], null] adverbPrimitive
+| adverbPrimitive either[either[either["-enriched", null], null], null]

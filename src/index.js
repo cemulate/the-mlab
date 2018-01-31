@@ -4,10 +4,16 @@ import * as R from './random-utils.js';
 import nlabGrammar from './grammar/nlab.ne';
 import NearleyGenerator from 'nearley-generator';
 
+import fakeLogo from './img/fakelogo.png';
+
 function stripLinks(el) {
     while (el.children.length > 0) {
         el.children[0].replaceWith(el.children[0].innerText);
     }
+}
+
+function capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 function makeTocListItem(txt) {
@@ -22,9 +28,15 @@ function makeTocListItem(txt) {
 function makePage() {
     let g = new NearleyGenerator(nlabGrammar);
 
-    let pageTitle = document.getElementById('title');
-    pageTitle.innerHTML = g.generate('title', 0.3);
-    stripLinks(pageTitle);
+    let t = capitalize(g.generate('title', 0.3).trim());
+
+    document.getElementById('title').innerHTML = t;
+    document.getElementById('window-title').innerHTML = t;
+    stripLinks(document.getElementById('title'));
+    stripLinks(document.getElementById('window-title'));
+
+    document.getElementById('favicon').href = fakeLogo;
+    document.getElementById('logo-image').src = fakeLogo;
 
     let sectionTitles = ['Idea', 'Definitions', 'Properties', 'Examples'];
 
@@ -38,7 +50,7 @@ function makePage() {
             let innerList = document.createElement('ul');
             let n = R.randomInRange(2, 5);
             for (let i = 0; i < n; i ++) {
-                let content = g.generate('nounPhrases', 0.3);
+                let content = capitalize(g.generate('nounPhrases', 0.3).trim());
                 let li = makeTocListItem(content);
                 innerList.appendChild(li);
             }
@@ -55,7 +67,7 @@ function makePage() {
 
         main.appendChild(header);
 
-        let nSentences = R.randomInRange(7, 12);
+        let nSentences = R.randomInRange(5, 9);
 
         let defnProbs = [0.8, 0.5, 0.15];
         let listProbs = [0.7, 0.3];
@@ -64,7 +76,7 @@ function makePage() {
         let runningPar = document.createElement('p');
         for (let i = 0; i < nSentences; i ++) {
             let span = document.createElement('span');
-            span.innerHTML = g.generate((i === 0) ? 'openingSentence' : 'sentence', 0.6);
+            span.innerHTML = capitalize(g.generate((i === 0) ? 'openingSentence' : 'sentence', 0.6).trim());
             runningPar.appendChild(span);
 
             if (defns < defnProbs.length && R.roll(defnProbs[defns])) {
@@ -72,7 +84,7 @@ function makePage() {
                 runningPar = document.createElement('p');
 
                 let dp = document.createElement('p');
-                dp.innerHTML = g.generate('defn', 0.8);
+                dp.innerHTML = g.generate('defn', 0.5);
                 main.appendChild(dp);
                 defns ++;
             }
@@ -82,7 +94,7 @@ function makePage() {
                 let nItems = R.randomInRange(2, 5);
                 for (let i = 0; i < nItems; i ++) {
                     let li = document.createElement('li');
-                    li.innerHTML = g.generate('listItem', 0.5);
+                    li.innerHTML = capitalize(g.generate('listItem', 0.5).trim());
                     list.appendChild(li);
                 }
                 runningPar.appendChild(list);

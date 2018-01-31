@@ -5,12 +5,13 @@
   "author": "Chase Meadors",
   "scripts": {
     "serve": "webpack-dev-server -d",
-    "build": "webpack"
+    "build": "webpack --define process.env.NODE_ENV=production"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.3.1",
     "css-loader": "^0.28.4",
     "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^1.1.6",
     "nearley": "^2.11.0",
     "nearley-loader": "0.0.3",
     "node-sass": "^4.5.3",

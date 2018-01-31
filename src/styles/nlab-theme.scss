@@ -47,6 +47,19 @@ a {
             list-style-type: none;
         }
     }
+    img#logo-image {
+        width: 50px;
+        transform: translate(-15px, -15px);
+    }
+    div#top-nlab {
+        margin-top: 30px;
+        margin-left: 50px;
+    }
+    h1#title-header {
+        display: inline;
+        font-size: 2em;
+        padding-top: 20px;
+    }
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: $nlab-heading-font;
