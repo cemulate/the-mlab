@@ -76,7 +76,7 @@ function makePage() {
         let runningPar = document.createElement('p');
         for (let i = 0; i < nSentences; i ++) {
             let span = document.createElement('span');
-            span.innerHTML = capitalize(g.generate('sentence', 0.6).trim());
+            span.innerHTML = capitalize(g.generate((i === 0) ? 'openingSentence' : 'sentence', 0.6).trimLeft());
             runningPar.appendChild(span);
 
             if (defns < defnProbs.length && R.roll(defnProbs[defns])) {

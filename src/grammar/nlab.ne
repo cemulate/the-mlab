@@ -77,6 +77,7 @@ nounPhrases ->
 | maybe[description] _ ml[nouns] _ "arising from" _ ml[adj] _ ml[nouns]
 
 connective -> "generally" | "moreover" | "therefore" | "it follows that" | "similarly" | "sometimes" | "historically" | "note that" | "as such" | "trivially" | "in a sense" | "certainly" | "conversely" | "informally" | "usually"
+openingConnective -> "generally" | "sometimes" | "historically" | "informally" | "in certain contexts"
 
 iffy ->
   "in the case that"
@@ -104,7 +105,7 @@ vagueWord ->
 easyWord -> "obvious" | "trivial" | "evident" | "straightforward" | "definitional" | "elementary"
 
 qualification ->
-  dtex[mDisplayMath]
+  dtex[mDisplayMathStatement]
 | "all" _ nounPhrases _ "commute"
 | "the" _ easyWord _ "diagram commutes"
 | "all the" _ easyWord _ "diagrams commute"
@@ -138,7 +139,8 @@ sentenceBody ->
 | "an analogous definition makes sense in the context of" _ nounPhrases maybe[parenthetical] "."
 | "in" _ vagueWord _ nounPhrases maybe[parenthetical] "," _ statement "."
 
-sentence -> _ maybe[connective "," _] sentenceBody _
+sentence -> maybe[connective "," _] sentenceBody _
+openingSentence -> maybe[openingConnective "," _] sentenceBody _
 
 defnBody ->
   "A" _ strong[nounPhrase] _ "is a" _ nounPhrase _ "along with a" _ nounPhrase _ "that satisfies certain properties" maybe[":" _ dtex[mDisplayMathStatement]]
