@@ -5,6 +5,7 @@ link[X] -> "<a href=\"#\">" $X "</a>"
 strong[X] -> "<strong>" $X "</strong>"
 ml[X] -> $X | link[$X]
 maybe[X] -> $X | null
+either[X,Y] -> $X | $Y
 
 scareQuote[X] -> "\"" $X "\""
 
@@ -67,7 +68,7 @@ description ->
 
 nounPhrase ->
   maybe[description] _ ml[noun] _ maybe[tex[mSmallExpr]]
-| "lift" _ tex[mSmallExpr] _ "of a" _ maybe[description _] nounPhrase _ tex[mSmallExpr] maybe[_ "through a" _ nounPhrase]
+| "lift" _ maybe[tex[mSmallExpr]] _ "of a" _ maybe[description _] nounPhrase _ maybe[tex[mSmallExpr]]
 
 nounPhrases ->
   maybe[description] _ ml[nouns]
@@ -83,6 +84,12 @@ iffy ->
 | "for situations where"
 | "provided that"
 | "if"
+
+inTheSense ->
+  "in the sense that"
+| "in that"
+| "corresponding to the fact that"
+| "in the following manner: "
 
 plainAlgebraicStructure -> "group" | "ring" | "field" | maybe["free" _] "module" | "vector space"
 algebraicStructure -> plainAlgebraicStructure | plainAlgebraicStructure "oid"
@@ -106,19 +113,33 @@ qualification ->
 | tex[mSmallExpr] _ "is" _ description
 | "the" _ description _ "object factors through" _ tex[mSmallExpr]
 
-
 statement ->
   "a" _ nounPhrase _ maybe["satisfying" _ dtex[mDisplayMathStatement]] "is always" _ description maybe[_ iffy _ qualification]
 | "a" _ nounPhrase _ "satisfies the" _ description _ "property" maybe[_ iffy _ qualification]
 | "a" _ nounPhrase _ "embeds" _ adverb _ "into all" _ description _ nounPhrases
 | "a" _ nounPhrase _ "is" _ description _ iffy _ qualification
-| "all" _ nounPhrases _ "are" _ description maybe[_ "in the sense that" _ dtex[mDisplayMathStatement]]
-| "the notion of a" _ nounPhrase _ "is an approximate solution to the problem of finding" _ nounPhrases _ "that satisfy" _ dtex[mDisplayMathStatement] maybe["with respect to" _ ml[nounPhrases]]
-| "the analogous definition makes sense in the context of" _ nounPhrases
-| "provided" _ qualification _ "," _ statement
-| nounPhrases _ "may be computed using" _ nounPhrases _ "or" _ nounPhrases maybe[_ "by observing that" dtex[mDisplayMathStatement]]
+| "all" _ nounPhrases _ "are" _ description maybe[_ inTheSense _ dtex[mDisplayMathStatement]]
+| nounPhrases _ "are" _ nounPhrases
 
-defn -> strong["Definition"] ": " defnBody
+parentheticalBody ->
+  "where by" _ "\"" description "\"" _ "we mean" maybe[", of course,"] _ statement
+| "meaning" _ tex[mSmallExpr] _ "is" _ description
+
+parenthetical -> " (" parentheticalBody ") "
+
+sentenceBody ->
+  iffy _ qualification "," _ statement "."
+| iffy _ qualification "," _ "it is said that" _ statement "."
+| iffy _ tex[mSmallExpr] _ "is" _ description maybe[parenthetical] "," _ "then so is" _ tex[mSmallExpr]
+| nounPhrases _ "may be computed using" _ nounPhrases _ "or" _ nounPhrases either[".", _ "by observing that" dtex[mDisplayMathStatement]]
+| nounPhrases _ "may be computed using" _ nounPhrases _ iffy _ qualification "."
+| "provided" _ qualification maybe[parenthetical] "," _ statement "."
+| "the notion of a" _ nounPhrase _ "is an approximate solution to the problem of finding" _ nounPhrases _ "that satisfy" _ dtex[mDisplayMathStatement] maybe["with respect to" _ ml[nounPhrases]]
+| "an analogous definition makes sense in the context of" _ nounPhrases maybe[parenthetical] "."
+| "in" _ vagueWord _ nounPhrases maybe[parenthetical] "," _ statement "."
+
+sentence -> _ maybe[connective "," _] sentenceBody _
+
 defnBody ->
   "A" _ strong[nounPhrase] _ "is a" _ nounPhrase _ "along with a" _ nounPhrase _ "that satisfies certain properties" maybe[":" _ dtex[mDisplayMathStatement]]
 | "A" _ strong[nounPhrase] _ "is a generalization of the notion of a" _ nounPhrase _ "into the context of" _ nounPhrases
@@ -127,13 +148,6 @@ defnBody ->
 | nounPhrases _ "are said to be" _ strong[adj] _ iffy _ qualification
 | "Given" _ tex[mSmallExpr] _ "and" _ tex[mSmallExpr] _ "," _ "a" _ nounPhrase _ "is" _ strong[adj] _ iffy _ qualification
 
-conditional ->
-  "if" _ statement "," _ "then" _ statement
-| "in the case that" _ statement "," _ statement
-| "when" _ statement "," _ "it is said that" _ statement
-| "in" _ vagueWord _ nounPhrases "," _ statement
+defn -> strong["Definition"] ": " defnBody
 
-sentence -> connective "," _ conditional "." _
-openingSentence -> conditional "." _
-listItem -> statement
 title -> maybe[adverb] _ adj _ noun

@@ -76,7 +76,7 @@ function makePage() {
         let runningPar = document.createElement('p');
         for (let i = 0; i < nSentences; i ++) {
             let span = document.createElement('span');
-            span.innerHTML = capitalize(g.generate((i === 0) ? 'openingSentence' : 'sentence', 0.6).trim());
+            span.innerHTML = capitalize(g.generate('sentence', 0.6).trim());
             runningPar.appendChild(span);
 
             if (defns < defnProbs.length && R.roll(defnProbs[defns])) {
@@ -94,7 +94,7 @@ function makePage() {
                 let nItems = R.randomInRange(2, 5);
                 for (let i = 0; i < nItems; i ++) {
                     let li = document.createElement('li');
-                    li.innerHTML = capitalize(g.generate('listItem', 0.5).trim());
+                    li.innerHTML = capitalize(g.generate('statement', 0.5).trim());
                     list.appendChild(li);
                 }
                 runningPar.appendChild(list);
