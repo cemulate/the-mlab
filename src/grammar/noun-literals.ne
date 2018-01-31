@@ -42,7 +42,7 @@ nounPrimitive ->
 | "chain complex"
 | "spectrum"
 | "operad"
-| "extensions"
+| "extension"
 | "structure"
 | digit "-cell"
 
