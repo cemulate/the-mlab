@@ -16,10 +16,11 @@ function capitalize(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-function makeTocListItem(txt) {
+function makeTocListItem(txt, anchor) {
     let li = document.createElement('li');
     let a = document.createElement('a');
     a.innerHTML = txt;
+    if (anchor) a.href = '#' + anchor
     stripLinks(a);
     li.appendChild(a);
     return li;
@@ -44,8 +45,8 @@ function makePage() {
     if (R.roll(0.4)) sectionTitles.push('Further discussion');
 
     let toc = document.getElementById('toc');
-    for (let title of sectionTitles) {
-        let li = makeTocListItem(title);
+    for (let [index, title] of sectionTitles.entries()) {
+        let li = makeTocListItem(title, 'section-' + (index + 1).toString());
         if (R.roll(0.5)) {
             let innerList = document.createElement('ul');
             let n = R.randomInRange(2, 5);
@@ -64,6 +65,7 @@ function makePage() {
     for (let [index, title] of sectionTitles.entries()) {
         let header = document.createElement('h1');
         header.innerHTML = (index + 1).toString() + '. ' + title;
+        header.id = 'section-' + (index + 1).toString();
 
         main.appendChild(header);
 
