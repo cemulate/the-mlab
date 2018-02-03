@@ -8,4 +8,4 @@ function randomInRange(n, m) {
     return n + Math.floor(Math.random() * (m - n));
 }
 
-export { roll, randomChoice, randomWeightedChoice, randomInRange, genWithExponentialBackoff };
+export { roll, randomChoice, randomInRange };

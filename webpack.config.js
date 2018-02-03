@@ -7,7 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    index: './index.js',
+    index: ['babel-polyfill', './index.js'],
   },
   output: {
     filename: '[name].bundle.js',
@@ -19,6 +19,21 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['babel-preset-env', {
+                targets: {
+                  browsers: ['defaults']
+                }
+              }],
+            ]
+          }
+        }
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader'
