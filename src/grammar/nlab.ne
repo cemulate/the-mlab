@@ -85,7 +85,7 @@ nounPhrases ->
 | maybe[description] _ ml[nouns] _ "over the" _ ml[noun] _ "of" _ ml[nouns]
 | maybe[description] _ ml[nouns] _ "arising from" _ ml[adj] _ ml[nouns]
 
-connective -> "generally" | "moreover" | "therefore" | "it follows that" | "similarly" | "sometimes" | "historically" | "note that" | "as such" | "trivially" | "in a sense" | "certainly" | "conversely" | "informally" | "usually"
+connective -> "in other terms" | "generally" | "moreover" | "therefore" | "it follows that" | "similarly" | "sometimes" | "historically" | "note that" | "as such" | "trivially" | "in a sense" | "certainly" | "conversely" | "informally" | "usually"
 openingConnective -> "generally" | "sometimes" | "historically" | "informally" | "in certain contexts"
 
 iffy ->
@@ -111,7 +111,7 @@ vagueWord ->
 | "visible"
 | algebraicStructure "-like"
 
-easyWord -> "obvious" | "trivial" | "evident" | "straightforward" | "definitional" | "elementary"
+easyWord -> "obvious" | "trivial" | "evident" | "straightforward" | "definitional" | "elementary" | "appropriate" | "correctly chosen"
 
 qualification ->
   dtex[mDisplayMathStatement]
@@ -119,7 +119,7 @@ qualification ->
 | "the" _ easyWord _ "diagram commutes"
 | "all the" _ easyWord _ "diagrams commute"
 | nounPhrases _ "are" _ scareQuote[vagueWord] _ "from" _ tex[mUpper] "'s" _ "point of view"
-| "the appropriate" _ nounPhrases _ "are considered"
+| "the" _ easyWord _ nounPhrases _ "are" _ description
 | tex[mSmallExpr] _ "is" _ description
 | "the" _ description _ "object factors through" _ tex[mSmallExpr]
 
@@ -137,12 +137,14 @@ parentheticalBody ->
 
 parenthetical -> " (" parentheticalBody ") "
 
+computed -> "computed" | "calculated" | "derived" | "written" | "made explicit"
+
 sentenceBody ->
   iffy _ qualification "," _ statement "."
 | iffy _ qualification "," _ "it is said that" _ statement "."
-| iffy _ tex[mSmallExpr] _ "is" _ description maybe[parenthetical] "," _ "then so is" _ tex[mSmallExpr]
-| nounPhrases _ "may be computed using" _ nounPhrases _ "or" _ nounPhrases either[".", _ "by observing that" dtex[mDisplayMathStatement]]
-| nounPhrases _ "may be computed using" _ nounPhrases _ iffy _ qualification "."
+| iffy _ tex[mSmallExpr] _ "is" _ description maybe[parenthetical] "," _ "then so is" _ tex[mSmallExpr] "."
+| nounPhrases _ "may be" _ computed _ "using" _ nounPhrases _ "or" _ nounPhrases either[".", _ "by observing that" dtex[mDisplayMathStatement]]
+| nounPhrases _ "may be" _ computed _ "using" _ nounPhrases _ iffy _ qualification "."
 | "provided" _ qualification maybe[parenthetical] "," _ statement "."
 | "the notion of a" _ nounPhrase _ "is an approximate solution to the problem of finding" _ nounPhrases _ "that satisfy" _ dtex[mDisplayMathStatement] maybe["with respect to" _ ml[nounPhrases]]
 | "an analogous definition makes sense in the context of" _ nounPhrases maybe[parenthetical] "."
