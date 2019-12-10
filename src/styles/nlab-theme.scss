@@ -6,63 +6,86 @@ $global-width: 880px;
 
 @include foundation-global-styles;
 @include foundation-xy-grid-classes;
+@include foundation-flex-classes;
 // @include foundation-typography;
 // @include foundation-menu;
 // @include foundation-top-bar;
 //@include foundation-callout;
 //@include foundation-button;
 
-$nlab-heading-font: georgia;
-$nlab-body-font: verdana;
-$nlab-green: #008B26;
+$nlab-heading-font: dejavu serif, cambria;
+$nlab-heading-font-weight: 400;
+$nlab-body-font: dejavu serif, cambria;
+$nlab-body-font-size: 1.2em;
+$nlab-green: rgb(34, 102, 34);
+$nlab-link-hover-color: rgb(44, 102, 216);
 $nlab-body-color: rgb(51, 51, 51);
+
+$nlab-subdued-color: rgb(136, 136, 136);
+$nlab-subdued-font-size: 13px;
+$nlab-subdued-font: sans-serif;
 
 body {
     font-family: $nlab-body-font;
-    font-size: 1em;
+    font-size: $nlab-body-font-size;
     color: $nlab-body-color;
 }
 a {
     color: $nlab-green;
     text-decoration: underline;
     &:hover {
-        color: white;
-        background-color: blue;
+        color: $nlab-link-hover-color;
     }
 }
-.header, .toc {
-    a {
-        color: black;
-        cursor: pointer;
-        &:hover {
-            color: white;
-            background-color: black;
-        }
-    }
+#title-header {
+    display: inline;
+    color: $nlab-green;
+    font-size: 2.2em;
+    padding-top: 20px;
+}
+.toc {
     ul {
         li {
             list-style-type: none;
         }
     }
-    img#logo-image {
-        width: 50px;
-        transform: translate(-15px, -15px);
-    }
     div#top-nlab {
         margin-top: 30px;
         margin-left: 50px;
     }
-    h1#title-header {
-        display: inline;
-        font-size: 2em;
-        padding-top: 20px;
+    h2 {
+        margin-top: 0;
     }
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: $nlab-heading-font;
+    font-weight: $nlab-heading-font-weight;
 }
 h1 {
     font-size: 1.75em;
+}
+#header-bar {
+    margin-top: 15px;
+    font-family: $nlab-subdued-font;
+    img#logo-image {
+        width: 50px;
+    }
+    span.web-name {
+        font-family: Arial;
+    }
+    span#header-links a, input#search-bar {
+        font-size: $nlab-subdued-font-size;
+        margin: 0 12px 0 12px;
+    }
+    span#header-links a {
+        color: $nlab-subdued-color;
+    }
+    input#search-bar {
+        color: darken($nlab-subdued-color, 20%);
+        border-radius: 5px;
+        border: 1px solid lightgray;
+        padding: 5px;
+    }
 }
 .header {
     color: $nlab-green;

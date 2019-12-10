@@ -13,23 +13,32 @@
 </head>
 
 <body>
+  <div id="header-bar" class="grid-container fluid">
+    <div class="grid-x grid-margin-x align-justify">
+      <div class="cell shrink">
+        <img id="logo-image">
+        <span class="web-name">mLab</span>
+      </div>
+      <div class="cell shrink">
+        <span id="header-links">
+          <a href=".">Home Page</a>
+          <a href=".">All Pages</a>
+          <a href=".">Latest Revisions</a>
+          <a href=".">Discuss this page</a>
+          <a href=".">Feeds</a>
+          <a href="https://github.com/cemulate/the-mlab" target="_blank">View on Github!</a>
+        </span>
+        <input id="search-bar" type="text" value="Search" readonly>
+      </div>
+    </div>
+  </div>
   <div id="root" class="grid-container nlab">
-    <div class="header">
-      <div id="top-nlab"><strong>mLab</strong></div>
-      <img id="logo-image"><h1 id="title-header"><strong id="title"></strong></h1>
-      <ul>
-        <li><a target="_blank" href="https://cemulate.github.io/">My Home Page</a></li>
-        <li><a href=".">All Pages</a></li>
-        <li><a href=".">Latest Revisions</a></li>
-        <li><a target="_blank" href="https://github.com/cemulate">Authors</a></li>
-        <li><a href=".">Feeds</a></li>
-        <li><a href=".">Export</a></li>
-        <li><a target="_blank" href="https://github.com/cemulate/the-mlab">View on Github!</a></li>
-      </ul>
+    <div>
+      <span id="title-header"><span id="title"></span></span>
     </div>
 
     <div class="toc">
-      <h1>Contents</h1>
+      <h2>Contents</h2>
       <ol id="toc"></ol>
     </div>
 

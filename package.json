@@ -29,7 +29,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
-    "foundation-sites": "^6.4.4-rc1",
+    "foundation-sites": "^6.6.0",
     "nearley-generator": "^1.0.1",
     "randexp": "^0.5.3"
   }

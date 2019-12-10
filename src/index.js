@@ -63,7 +63,7 @@ function makePage() {
     let main = document.getElementById('content');
 
     for (let [index, title] of sectionTitles.entries()) {
-        let header = document.createElement('h1');
+        let header = document.createElement('h2');
         header.innerHTML = (index + 1).toString() + '. ' + title;
         header.id = 'section-' + (index + 1).toString();
 
