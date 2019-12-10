@@ -1,13 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    index: ['babel-polyfill', './index.js'],
+    index: ['@babel/polyfill', './index.js'],
   },
   output: {
     filename: '[name].bundle.js',
@@ -25,7 +25,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['babel-preset-env', {
+              ['@babel/preset-env', {
                 targets: {
                   browsers: ['defaults']
                 }
@@ -40,7 +40,13 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css-loader!sass-loader'),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader',
+          'sass-loader',
+        ],
       },
       {
          test: /\.(png|jpg|gif)$/,
@@ -50,18 +56,20 @@ module.exports = {
              options: {
                limit: 8192
              }
-           }
-         ]
+           },
+         ],
      },
      {
         test: /\.ne$/,
-        loader: 'nearley-loader'
+        use: [
+          'nearley-loader'
+        ],
      }
     ]
   },
   plugins: [
     new UglifyJSPlugin(),
-    new ExtractTextPlugin('styles.css'),
+    new MiniCssExtractPlugin({ filename: 'styles.css' }),
     new CopyWebpackPlugin([
       {from: './index.html', to: './index.html'},
     ]),

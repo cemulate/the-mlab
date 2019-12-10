@@ -67,8 +67,8 @@ mDisplayMathStatement ->
 
 # Main ==================================
 
-@include "src/grammar/noun-literals.ne"
-@include "src/grammar/adjective-literals.ne"
+@include "noun-literals.ne"
+@include "adjective-literals.ne"
 
 description ->
   ml[adverb] _ description
