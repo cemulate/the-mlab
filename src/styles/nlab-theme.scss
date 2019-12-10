@@ -68,9 +68,10 @@ h1 {
     margin-top: 15px;
     font-family: $nlab-subdued-font;
     img#logo-image {
-        width: 50px;
+        width: 40px;
     }
     span.web-name {
+        margin-left: 6px;
         font-family: Arial;
     }
     span#header-links a, input#search-bar {
