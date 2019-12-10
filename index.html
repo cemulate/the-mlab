@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title id="window-title"></title>
+  <link rel="stylesheet" href="styles.css">
+  <link id="favicon" rel="icon" href="">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta/katex.min.css" integrity="sha384-L/SNYu0HM7XECWBeshTGLluQO9uVI1tvkCtunuoUbCHHoTH76cDyXty69Bb9I0qZ" crossorigin="anonymous"> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta/katex.min.js" integrity="sha384-ad+n9lzhJjYgO67lARKETJH6WuQVDDlRfj81AJJSswMyMkXTD49wBj5EP004WOY6" crossorigin="anonymous"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta/contrib/auto-render.min.js" integrity="sha384-EkJr57fExjeMKAZnlVBuoBoX0EJ4BiDPiAd/JyTzIA65ORu4hna7V6aaq4zsUvJ2" crossorigin="anonymous"></script> -->
+</head>
+
+<body>
+  <div id="header-bar" class="grid-container fluid">
+    <div class="grid-x grid-margin-x align-justify">
+      <div class="cell shrink">
+        <img id="logo-image">
+        <span class="web-name">mLab</span>
+      </div>
+      <div class="cell shrink">
+        <span id="header-links">
+          <a href=".">Home Page</a>
+          <a href=".">All Pages</a>
+          <a href=".">Latest Revisions</a>
+          <a href=".">Discuss this page</a>
+          <a href=".">Feeds</a>
+          <a href="https://github.com/cemulate/the-mlab" target="_blank">View on Github!</a>
+        </span>
+        <input id="search-bar" type="text" value="Search" readonly>
+      </div>
+    </div>
+  </div>
+  <div id="root" class="grid-container nlab">
+    <div>
+      <span id="title-header"><span id="title"></span></span>
+    </div>
+
+    <div class="toc">
+      <h2>Contents</h2>
+      <ol id="toc"></ol>
+    </div>
+
+    <div id="content"></div>
+  </div>
+  <script src="index.bundle.js"></script>
+</body>
+
+</html>
