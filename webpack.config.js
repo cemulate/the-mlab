@@ -61,7 +61,7 @@ module.exports = {
      {
         test: /\.ne$/,
         use: [
-          'nearley-loader'
+          '@leetcode/nearley-loader'
         ],
      }
     ]
