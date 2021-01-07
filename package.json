@@ -4,8 +4,8 @@
   "description": "A wiki for collaborative work on \"category theory\"",
   "author": "Chase Meadors",
   "scripts": {
-    "serve": "webpack-dev-server -d",
-    "build": "webpack --define process.env.NODE_ENV=production"
+    "serve": "webpack serve --mode=development",
+    "build": "webpack --mode=production"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -22,7 +22,6 @@
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.1",
