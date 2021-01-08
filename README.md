@@ -4,6 +4,8 @@ The mLab
 This is a parody of [the nLab](https://ncatlab.org/nlab/show/HomePage), a wiki for collaborative work on category theory and higher category theory.
 As anyone who's visited is probably aware, the jargon can be absolutely *impenetrable* for the uninitiated -- thus, the idea for this project was born!
 
+Once you generate a page, you can link to it using the hash url displayed; loading the site with no hash or following any link in the body will get you a new random page!
+
 How it works
 ===============
 
