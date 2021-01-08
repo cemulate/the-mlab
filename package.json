@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "foundation-sites": "^6.6.3",
-    "nearley-generator": "^1.0.3",
-    "randexp": "^0.5.3"
+    "nearley-generator": "^1.1.0",
+    "seedrandom": "^3.0.5"
   }
 }
