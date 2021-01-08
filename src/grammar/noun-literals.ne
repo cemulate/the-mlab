@@ -54,8 +54,8 @@ nounPrimitive ->
 | either[either["sub-", null], null] "object classifier"
 
 noun ->
-  either[either["co-", null], null] nounPrimitive
-| either[either[either["quasi-", null], null], null] nounPrimitive
+  maybe4["co-"] nounPrimitive
+| maybe8["quasi-"] nounPrimitive
 
 nounPrimitives ->
   maybe4["\\( (\\infty, 1) \\)-"] "categories"
@@ -102,5 +102,5 @@ nounPrimitives ->
 | digit "-cells"
 
 nouns ->
-  either[either["co-", null], null] nounPrimitives
-| either[either[either["quasi-", null], null], null] nounPrimitives
+  maybe4["co-"] nounPrimitives
+| maybe8["quasi-"] nounPrimitives

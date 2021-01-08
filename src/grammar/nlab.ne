@@ -5,6 +5,8 @@ link[X] -> "<a href=\".\">" $X "</a>"
 strong[X] -> "<strong>" $X "</strong>"
 ml[X] -> $X | link[$X]
 maybe[X] -> $X | null
+maybe4[X] -> maybe[maybe2[$X]]
+maybe8[X] -> maybe[maybe4[$X]]
 either[X,Y] -> $X | $Y
 
 scareQuote[X] -> "\"" $X "\""
@@ -47,8 +49,8 @@ mFunctorish -> mCategoryish _ mArrow _ mCategoryish
 mSmallExpr ->
   "{" mSmallExpr "}_{"  mSmallExpr "}"
 | "{" mSmallExpr "}^{" mSmallExpr "}"
-| group[mSmallExpr]
 | mSmallExpr _ mBinOp _ mSmallExpr
+| maybeGroup[mSmallExpr]
 | mCategoryish
 | mFunctorish
 | mAnyCharFA
@@ -78,17 +80,14 @@ description ->
 nounPhrase ->
   maybe[description] _ ml[noun] _ maybe[tex[mSmallExpr]]
 | "lift" _ maybe[tex[mSmallExpr]] _ "of a" _ maybe[description _] nounPhrase _ maybe[tex[mSmallExpr]]
-| nounPhrase maybe[tex[mSmallExpr]] _ "augmented with a" _ maybe[description _] nounPhrase
-| nounPhrase maybe[tex[mSmallExpr]] _ "together with a" _ maybe[description _] nounPhrase
-| tex[mSmallExpr] "-truncated" _ nounPhrase
-| tex[mSmallExpr] "-indexed" _ nounPhrase
+| maybe[tex[mSmallExpr] either["-truncated", "-indexed"] _] nounPhrase maybe[tex[mSmallExpr]] _ "augmented with a" _ maybe[description _] nounPhrase
+| maybe[tex[mSmallExpr] either["-truncated", "-indexed"] _] nounPhrase maybe[tex[mSmallExpr]] _ "together with a" _ maybe[description _] nounPhrase
 
 nounPhrases ->
   maybe[description] _ ml[nouns]
 | ml[adj] _ ml[nouns]
 | maybe[description] _ ml[nouns] _ "over the" _ ml[noun] _ "of" _ nounPhrases
 | maybe[description] _ ml[nouns] _ "arising from" _ ml[adj] _ nounPhrases
-| maybe[description] _ ml[nouns] _ "together with a" _ nounPhrase
 
 connective -> "in other terms" | "generally" | "moreover" | "therefore" | "it follows that" | "similarly" | "sometimes" | "historically" | "note that" | "as such" | "trivially" | "in a sense" | "certainly" | "conversely" | "informally" | "usually"
 openingConnective -> "generally" | "sometimes" | "historically" | "informally" | "in certain contexts"
@@ -131,7 +130,7 @@ qualification ->
 statement ->
   "a" _ nounPhrase _ maybe["satisfying" _ dtex[mDisplayMathStatement]] "is always" _ description maybe[_ iffy _ qualification]
 | "a" _ nounPhrase _ "satisfies the" _ description _ "property" maybe[_ iffy _ qualification]
-| "a" _ nounPhrase _ "embeds" _ adverb _ "into all" _ description _ nounPhrases
+| "a" _ nounPhrase _ "embeds" _ adverbPlain _ "into all" _ description _ nounPhrases
 | "a" _ nounPhrase _ "is" _ description _ iffy _ qualification
 | "all" _ nounPhrases _ "are" _ description maybe[_ inTheSense _ dtex[mDisplayMathStatement]]
 | nounPhrases _ "are" _ nounPhrases
@@ -151,7 +150,7 @@ sentenceBody ->
 | nounPhrases _ "may be" _ computed _ "using" _ nounPhrases _ "or" _ nounPhrases either[".", _ "by observing that" dtex[mDisplayMathStatement]]
 | nounPhrases _ "may be" _ computed _ "using" _ nounPhrases _ iffy _ qualification "."
 | "provided" _ qualification maybe[parenthetical] "," _ statement "."
-| "the notion of a" _ nounPhrase _ "is an approximate solution to the problem of finding" _ nounPhrases _ "that satisfy" _ dtex[mDisplayMathStatement] maybe["with respect to" _ ml[nounPhrases]]
+| "the notion of a" _ nounPhrase _ "is an approximate solution to the problem of finding" _ nounPhrases _ "that satisfy" _ dtex[mDisplayMathStatement] maybe["with respect to" _ ml[nounPhrases]] "."
 | "an analogous definition makes sense in the context of" _ nounPhrases maybe[parenthetical] "."
 | "in" _ vagueWord _ nounPhrases maybe[parenthetical] "," _ statement "."
 
@@ -159,12 +158,12 @@ sentence -> maybe[connective "," _] sentenceBody _
 openingSentence -> maybe[openingConnective "," _] sentenceBody _
 
 defnBody ->
-  "A" _ strong[nounPhrase] _ "is a" _ nounPhrase _ "along with a" _ nounPhrase _ "that satisfies certain properties" maybe[":" _ dtex[mDisplayMathStatement]]
-| "A" _ strong[nounPhrase] _ "is a generalization of the notion of a" _ nounPhrase _ "into the context of" _ nounPhrases
-| "In the context of" _ nounPhrases "," _ nounPhrases _ "are simply" _ nounPhrases _ "over" _ nounPhrases
-| "A" _ nounPhrase _ "is called" _ strong[adj] _ iffy _ qualification
-| nounPhrases _ "are said to be" _ strong[adj] _ iffy _ qualification
-| "Given" _ tex[mSmallExpr] _ "and" _ tex[mSmallExpr] _ "," _ "a" _ nounPhrase _ "is" _ strong[adj] _ iffy _ qualification
+  "A" _ strong[nounPhrase] _ "is a" _ nounPhrase _ "along with a" _ nounPhrase _ "that satisfies certain properties" either[".", ":" _ dtex[mDisplayMathStatement]]
+| "A" _ strong[nounPhrase] _ "is a generalization of the notion of a" _ nounPhrase _ "into the context of" _ nounPhrases "."
+| "In the context of" _ nounPhrases "," _ nounPhrases _ "are simply" _ nounPhrases _ "over" _ nounPhrases "."
+| "A" _ nounPhrase _ "is called" _ strong[adj] _ iffy _ qualification "."
+| nounPhrases _ "are said to be" _ strong[adj] _ iffy _ qualification "."
+| "Given" _ tex[mSmallExpr] _ "and" _ tex[mSmallExpr] _ "," _ "a" _ nounPhrase _ "is" _ strong[adj] _ iffy _ qualification "."
 
 defn -> strong["Definition"] ": " defnBody
 

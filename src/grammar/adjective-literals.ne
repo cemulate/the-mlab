@@ -1,4 +1,7 @@
 either[X,Y] -> $X | $Y
+maybe2[X] -> $X | null
+maybe4[X] -> maybe2[maybe2[$X]]
+maybe8[X] -> maybe2[maybe4[$X]]
 
 adjPrimitive ->
   "categorical"
@@ -54,14 +57,14 @@ adjPrimitive ->
 | "internal"
 
 adj ->
-  either[either["co-", null], null] adjPrimitive
+  maybe4["co-"] adjPrimitive
 
 adverbPrimitive ->
   "categorically"
 | "monoidally"
 | "functorially"
 | "exactly"
-| "accessiblly"
+| "accessibally"
 | "topologically"
 | "canonically"
 | "reflectively"
@@ -84,6 +87,7 @@ adverbPrimitive ->
 | "semantically"
 | "syntactically"
 
+adverbPlain -> maybe4["co-"] adverbPrimitive
 adverb ->
-  either[either["co-", null], null] adverbPrimitive
-| adverbPrimitive either[either[either["-enriched", null], null], null]
+  adverbPlain
+| adverbPlain maybe8["-enriched"]
