@@ -78,12 +78,17 @@ description ->
 nounPhrase ->
   maybe[description] _ ml[noun] _ maybe[tex[mSmallExpr]]
 | "lift" _ maybe[tex[mSmallExpr]] _ "of a" _ maybe[description _] nounPhrase _ maybe[tex[mSmallExpr]]
+| nounPhrase maybe[tex[mSmallExpr]] _ "augmented with a" _ maybe[description _] nounPhrase
+| nounPhrase maybe[tex[mSmallExpr]] _ "together with a" _ maybe[description _] nounPhrase
+| tex[mSmallExpr] "-truncated" _ nounPhrase
+| tex[mSmallExpr] "-indexed" _ nounPhrase
 
 nounPhrases ->
   maybe[description] _ ml[nouns]
 | ml[adj] _ ml[nouns]
-| maybe[description] _ ml[nouns] _ "over the" _ ml[noun] _ "of" _ ml[nouns]
-| maybe[description] _ ml[nouns] _ "arising from" _ ml[adj] _ ml[nouns]
+| maybe[description] _ ml[nouns] _ "over the" _ ml[noun] _ "of" _ nounPhrases
+| maybe[description] _ ml[nouns] _ "arising from" _ ml[adj] _ nounPhrases
+| maybe[description] _ ml[nouns] _ "together with a" _ nounPhrase
 
 connective -> "in other terms" | "generally" | "moreover" | "therefore" | "it follows that" | "similarly" | "sometimes" | "historically" | "note that" | "as such" | "trivially" | "in a sense" | "certainly" | "conversely" | "informally" | "usually"
 openingConnective -> "generally" | "sometimes" | "historically" | "informally" | "in certain contexts"

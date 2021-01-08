@@ -1,8 +1,11 @@
 digit -> [0-9]
 either[X,Y] -> $X | $Y
+maybe2[X] -> $X | null
+maybe4[X] -> maybe2[maybe2[$X]]
+maybe8[X] -> maybe2[maybe4[$X]]
 
 nounPrimitive ->
-  "category"
+  maybe4["\\( (\\infty, 1) \\)-"] "category"
 | "monoid"
 | "monad"
 | "presheaf"
@@ -10,9 +13,10 @@ nounPrimitive ->
 | "endofunctor"
 | "functor"
 | "topos"
+| maybe4["\\( (\\infty, 1) \\)-"] "topos"
 | "image"
 | "preimage"
-| "groupoid"
+| maybe4["\\( (\\infty, 1) \\)-"] "groupoid"
 | "homology"
 | "cohomology"
 | "hom-object"
@@ -25,7 +29,7 @@ nounPrimitive ->
 | "cover"
 | "hypercover"
 | "embedding"
-| "homotopy"
+| maybe2["higher "] "homotopy"
 | "pushout"
 | "pullback"
 | "product"
@@ -45,23 +49,26 @@ nounPrimitive ->
 | "extension"
 | "structure"
 | digit "-cell"
+| "term"
+| "type"
+| either[either["sub-", null], null] "object classifier"
 
 noun ->
   either[either["co-", null], null] nounPrimitive
 | either[either[either["quasi-", null], null], null] nounPrimitive
 
 nounPrimitives ->
-  "categories"
+  maybe4["\\( (\\infty, 1) \\)-"] "categories"
 | "monoids"
 | "monads"
 | "presheaves"
 | "sheaves"
 | "endofunctors"
 | "functors"
-| "topoi"
+| maybe4["\\( (\\infty, 1) \\)-"] "topoi"
 | "images"
 | "preimages"
-| "groupoids"
+| maybe4["\\( (\\infty, 1) \\)-"] "groupoids"
 | "homologies"
 | "cohomologies"
 | "hom-objects"
@@ -74,7 +81,7 @@ nounPrimitives ->
 | "covers"
 | "hypercovers"
 | "embeddings"
-| "homotopies"
+| maybe2["higher"] "homotopies"
 | "pushouts"
 | "pullbacks"
 | "products"

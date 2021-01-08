@@ -47,6 +47,11 @@ adjPrimitive ->
 | "relative"
 | "dendroial"
 | "reflective"
+| "higher"
+| "pure"
+| "extensional"
+| "homotopy theoretic"
+| "internal"
 
 adj ->
   either[either["co-", null], null] adjPrimitive
@@ -76,6 +81,8 @@ adverbPrimitive ->
 | "relatively"
 | "dendroidally"
 | "reflectively"
+| "semantically"
+| "syntactically"
 
 adverb ->
   either[either["co-", null], null] adverbPrimitive
