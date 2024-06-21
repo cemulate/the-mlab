@@ -6,15 +6,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    index: ['@babel/polyfill', './index.js'],
+    index: ['./index.js'],
   },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, './dist')
-  },
-  devServer: {
-    contentBase: path.resolve(__dirname, './src'),
-    disableHostCheck: true
   },
   module: {
     rules: [
@@ -49,15 +45,8 @@ module.exports = {
       },
       {
          test: /\.(png|jpg|gif)$/,
-         use: [
-           {
-             loader: 'url-loader',
-             options: {
-               limit: 8192
-             }
-           },
-         ],
-     },
+         type: 'asset/inline',
+      },
      {
         test: /\.ne$/,
         use: [

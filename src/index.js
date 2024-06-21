@@ -1,3 +1,4 @@
+import 'core-js/stable';
 import './styles/nlab-theme.scss';
 
 import seedrandom from 'seedrandom';
