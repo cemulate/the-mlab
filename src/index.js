@@ -1,6 +1,12 @@
 import 'core-js/stable';
 import './styles/nlab-theme.scss';
 
+import Plausible from 'plausible-tracker';
+Plausible({
+    domain: 'cemulate.github.io/the-mlab',
+    apiHost: 'https://plausible.351321.xyz',
+}).enableAutoPageviews();
+
 import seedrandom from 'seedrandom';
 import { RandomUtil, seedToTitle, titleToSeed } from './random-utils.js';
 import nlabGrammar from './grammar/nlab.ne';
